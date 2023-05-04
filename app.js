@@ -4,6 +4,11 @@ const mongoose = require("mongoose");
 const date = require(__dirname + "/date.js"); //require a local module
 const _ = require("lodash");
 
+// Accessing the database configurations
+const config = require('./config');
+const dbConfig = config.database;
+
+
 const app = express();
 
 app.set("view engine", "ejs"); //pentru a folosi ejs
@@ -13,7 +18,7 @@ app.use(express.static("public")); //pentru a putea merge css si alte tipuri de 
 
 // db   
 
-mongoose.connect("mongodb+srv://andreeaC:pescarus33@cluster0.s1epyvo.mongodb.net/todolistDB", {useNewUrlParser: true}); //cream DB
+mongoose.connect(dbConfig.password, {useNewUrlParser: true}); //cream DB si folosim parola din file-ul config.js
 
 const itemsSchema = {     //schema pentru DB
     name: String
